@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Movie, Seat, Booking
 from rest_framework import viewsets
 from .serializers import MovieSerializer, SeatSerializer, BookingSerializer
@@ -25,7 +25,7 @@ def movie_list(request):
 
 #Renders seat booking 
 def seat_booking(request, movie_id):
-    movie = Movie.objects.get(id=movie_id)
+    movie = get_object_or_404(Movie, id=movie_id)
     seats = Seat.objects.all()
     return render(request, 'bookings/seat_booking.html', {'movie': movie, 'seats': seats})
 
