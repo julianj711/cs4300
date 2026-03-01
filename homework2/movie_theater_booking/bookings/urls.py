@@ -14,4 +14,5 @@ urlpatterns = [
     path("seat/<int:movie_id>/", views.seat_booking, name="book_seat"),
     path("history/", views.booking_history, name="booking_history"),
     path("api/", include(router.urls)),
+    path("confirm/<int:movie_id>/<int:seat_id>/", views.confirm_booking, name="confirm_booking"),
 ] 

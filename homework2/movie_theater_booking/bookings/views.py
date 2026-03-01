@@ -1,7 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Movie, Seat, Booking
 from rest_framework import viewsets
 from .serializers import MovieSerializer, SeatSerializer, BookingSerializer
+from django.contrib.auth.decorators import login_required
 
 #For CRUD operations on movies.
 class MovieViewSet(viewsets.ModelViewSet):
@@ -29,7 +30,19 @@ def seat_booking(request, movie_id):
     seats = Seat.objects.all()
     return render(request, 'bookings/seat_booking.html', {'movie': movie, 'seats': seats})
 
+#Confirms the booking
+@login_required
+def confirm_booking(request, movie_id, seat_id):
+    movie = get_object_or_404(Movie, id=movie_id)
+    seat = get_object_or_404(Seat, id=seat_id)
+    seat.booked()
+    Booking.objects.create(movie=movie, seat=seat, user=request.user)
+    return redirect('booking_history')
+
 #Renders booking history
 def booking_history(request):
-    bookings = Booking.objects.all()
+    if request.user.is_authenticated:
+        bookings = Booking.objects.filter(user=request.user)
+    else:
+        bookings = Booking.objects.none()
     return render(request, 'bookings/booking_history.html', {'bookings': bookings})

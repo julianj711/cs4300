@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-fze3o-p(u6rw#=(eyij60_tvx7v02iqgouv227%u%*76(j08he
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
+CSRF_TRUSTED_ORIGINS = ['https://app-cs5300-21.devedu.io']
 
 # Application definition
 
