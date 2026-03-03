@@ -28,6 +28,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = ['https://app-cs5300-21.devedu.io']
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
 
 # Application definition
 
