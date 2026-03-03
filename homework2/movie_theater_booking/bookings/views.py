@@ -19,6 +19,8 @@ class BookingViewSet(viewsets.ModelViewSet):
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
 
+#cannot look at movie list without being logged in
+@login_required
 #Renders movie list 
 def movie_list(request):
     movies = Movie.objects.all()
@@ -27,11 +29,12 @@ def movie_list(request):
 #Renders seat booking 
 def seat_booking(request, movie_id):
     movie = get_object_or_404(Movie, id=movie_id)
-    seats = Seat.objects.all()
+    seats = Seat.objects.filter(movie=movie)
     return render(request, 'bookings/seat_booking.html', {'movie': movie, 'seats': seats})
 
-#Confirms the booking
+#Cannot book without being logged in
 @login_required
+#Confirms the booking
 def confirm_booking(request, movie_id, seat_id):
     movie = get_object_or_404(Movie, id=movie_id)
     seat = get_object_or_404(Seat, id=seat_id)

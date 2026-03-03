@@ -3,7 +3,8 @@
 {% block content %}
 
 <h2 class="mb-4">Now Showing</h2>
-
+<a href="{% url 'booking_history' %}" class="btn btn-dark-green mb-3">My Booking History</a>
+<a href="/admin" class="btn btn-dark-green mb-3">Add Movies</a>
 <div class="row g-3">
     {% for movie in movies %}
     <div class="col-md-4">

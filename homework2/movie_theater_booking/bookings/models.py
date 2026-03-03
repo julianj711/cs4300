@@ -13,6 +13,8 @@ class Movie(models.Model):
 
 #track seat availability
 class Seat(models.Model):
+    #ForeignKey so that every seat is connected to a specific movie
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, null=True)
     seat_number =  models.CharField(max_length = 10)
     booking_status = models.BooleanField(default=False)
     
