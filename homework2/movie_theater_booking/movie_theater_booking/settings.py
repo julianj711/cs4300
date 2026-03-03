@@ -28,6 +28,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = ['https://app-cs5300-21.devedu.io']
+
+#Telling django where my login page is
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 
